@@ -299,6 +299,7 @@
     <Content Include="Views\KitMgmt\Details.cshtml" />
     <Content Include="Views\KitMgmt\Edit.cshtml" />
     <Content Include="Views\KitMgmt\Index.cshtml" />
+    <Content Include="Views\KitMgmt\Index -Orig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
