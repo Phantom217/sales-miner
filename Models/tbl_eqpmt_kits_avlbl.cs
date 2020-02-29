@@ -9,11 +9,10 @@
 
 namespace allpax_sale_miner.Models
 {
-    public partial class tbl_kit
+    public partial class tbl_eqpmt_kits_avlbl
     {
+        public string eqpmtType { get; set; }
         public string kitID { get; set; }
-        public string description { get; set; }
-        public string filePath { get; set; }
         public int id { get; set; }
     }
 }

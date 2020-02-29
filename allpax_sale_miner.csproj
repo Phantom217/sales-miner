@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomerEventController.cs" />
     <Compile Include="Controllers\CustomerMgmtController.cs" />
+    <Compile Include="Controllers\EqpmtKitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KitMgmtController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -203,7 +204,12 @@
     <Compile Include="Models\tbl_customer_event.cs">
       <DependentUpon>allpax_sale_miner.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbl_kit.cs" />
+    <Compile Include="Models\tbl_eqpmt_kits_avlbl.cs">
+      <DependentUpon>allpax_sale_miner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_kit.cs">
+      <DependentUpon>allpax_sale_miner.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -300,8 +306,11 @@
     <Content Include="Views\KitMgmt\Edit.cshtml" />
     <Content Include="Views\KitMgmt\Index.cshtml" />
     <Content Include="Views\KitMgmt\Index -Orig.cshtml" />
-    <Content Include="Views\CustomerMgmt\Index-table.cshtml" />
-    <Content Include="Views\CustomerMgmt\Index-bkup.cshtml" />
+    <Content Include="Views\EqpmtKits\Create.cshtml" />
+    <Content Include="Views\EqpmtKits\Delete.cshtml" />
+    <Content Include="Views\EqpmtKits\Details.cshtml" />
+    <Content Include="Views\EqpmtKits\Edit.cshtml" />
+    <Content Include="Views\EqpmtKits\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
