@@ -5,36 +5,181 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.eqpmtType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.kitID)
-        </th>
-        <th></th>
-    </tr>
+    <script>
+        $(document).ready(function () {
+            $(".record").click(function () {
+                selectedItem0 = $(this).attr("id");
+                selectedItem1 = $(this).find("#record_item1").html();
+                selectedItem2 = $(this).find("#record_item2").html();
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.eqpmtType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.kitID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+                $("#sel_id").val(selectedItem0);
+                $("#sel_eqpmt_type").val(selectedItem1);
+                $("sel_kitid").val(selectedItem2);
+            });
 
-</table>
+            $(".btn.btn-primary.editButton").click(function () {
+                $(this).parent().find(".editButton").hide();
+                $(this).parent().find(".updateButton").hide();
+                $(this).parent().find(".deleteButton").hide();
+                $(this).parent().find(".cancelButton").hide();
+
+                $(this).parent().find("#record_item1").hide();
+            });
+            $(".btn.btn-primary.cancelButton").click(function () {
+                $(this).parent().find(".editButton").hide();
+                $(this).parent().find(".updateButton").hide();
+                $(this).parent().find(".deleteButton").hide();
+                $(this).parent().find(".cancelButton").hide();
+                $(this).parent().find(".confirmButton").hide();
+            });
+            $(".btn.btn-primary.deleteButton").click(function () {
+                $(this).parent().find(".editButton").hide();
+                $(this).parent().find(".updateButton").hide();
+                $(this).parent().find(".deleteButton").hide();
+                $(this).parent().find(".cancelButton").hide();
+                $(this).parent().find(".confirmButton").hide();
+            });
+
+            $("#addButton").click(function () {
+                var add_kitid = $("#addRecordItem1").val();
+                var add_eqpmt = $("#addRecordItem2").val();
+
+                alert(
+                    "Selected for Add POST:" + '\n' +
+                    "Kit ID: " + add_kitid + '\n' +
+                    "Equipment type: " + add_eqpmt + '\n'
+                );
+                $("#.addRecordItem1").val();
+                $("#.addRecordItem2").val();
+            });
+
+            axios.post("/EqpmtKits/AddKit", {
+                kitID: add_kitid,
+                eqpmtType: add_eqpmt,
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (err) {
+                console.log(err);
+            });
+            $(".btn.btn-primary.updateButton").click(function () {
+                $(this).hide();
+                $(this).parent().find(".updateButton").show();
+                $(this).parent().find(".deleteButton").show();
+                $(this).parent().find(".cancelButton").show();
+            });
+
+            $(".btn.btn-primary.confirmButton").click(function () {
+                alert(
+                    "Selected for DELETE:" + '\n' +
+                    "id: " + selectedItem0 + '\n' +
+                    "kitID: " + selectedItem1 + '\n' +
+                    "Equipment Type: " + selectedItem2 + '\n'
+                );
+
+                axios.post("/EqpmtKits/DeleteKit", {
+                    id: selectedItem0,
+                }).then(function (res) {
+                    console.log(res);
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            });
+        });
+    </script>
+</head>
+<style>
+    div.scroll {
+        width: auto;
+        height: 400px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 0px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Available Kits</h4>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Record</button>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>"
+                            <h4 class="modal-title">Add Record</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <h6>ID</h6>
+                                    <p id="addRecord_item0" value="">AUTO</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>KIT ID</h5>
+                                    <input type="text" id="addRecordItem1" value="" />
+                                </div>
+                                <div class="col-md-3">
+                                    <h5>EQUIPMENT TYPE</h5>
+                                    <input type="text" id="addRecordItem2" value="" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <h5>ACTION</h5>
+                                    <button class="btn btn-primary" id="addButton">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Kit ID</th>
+                    <th scope="col">Eqpmt Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="record" id=@Html.DisplayFor(modelItem => item.id)>
+                        <td id="record_item0" value=@Html.DisplayFor(modelItem => item.id)>@Html.DisplayFor(modelItem => item.id)</td>
+                        <td id="record_item1" value=@Html.DisplayFor(modelItem => item.kitID)>@Html.DisplayFor(modelItem => item.kitID)</td>
+                        <td id="record_item2" value=@Html.DisplayFor(modelItem => item.eqpmtType)>@Html.DisplayFor(modelItem => item.eqpmtType)</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm editButton">Edit</button>
+                            <button class="btn btn-primary btn-sm updateButton" style="display:none;">Update</button>
+                            <button class="btn btn-primary btn-sm deleteButton">Delete</button>
+                            <button class="btn btn-primary btn-sm confirmButton" style="display:none;">Confirm</button>
+                            <button class="btn btn-primary btn-sm cancelButton" style="display:none;">Cancel</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-md-1">ID: <input type="text" id="sel_id" value="sel_id" /></div>
+        <div class="col-md-2">KIT ID: <input type="text" id="sel_kitid" value="sel_kitid" /></div>
+        <div class="col-md-2">EQUIPMENT TYPE: <input type="text" id="sel_eqpmt_type" value="sel_eqpmt_type" /></div>
+    </div>
+</div>
