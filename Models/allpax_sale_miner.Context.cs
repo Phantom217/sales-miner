@@ -19,5 +19,6 @@
         public virtual DbSet<tbl_customer_event> tbl_customer_event { get; set; }
         public virtual DbSet<tbl_kit> tbl_kit { get; set; }
         public virtual DbSet<tbl_eqpmt_kits_avlbl> tbl_eqpmt_kits_avlbl { get; set; }
+        public virtual DbSet<tbl_eqpmt_kits_current> tbl_eqpmt_kits_current { get; set; }
     }
 }
