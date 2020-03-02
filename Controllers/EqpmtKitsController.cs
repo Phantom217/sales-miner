@@ -15,7 +15,7 @@ namespace allpax_sale_miner.Controllers
             allpax_sale_minerEntities entities = new allpax_sale_minerEntities();
             List<tbl_eqpmt_kits_avlbl> available_kits = entities.tbl_eqpmt_kits_avlbl.ToList();
 
-            return View(available_kits.ToList());
+            return View(available_kits);
         }
 
         [HttpPost]
