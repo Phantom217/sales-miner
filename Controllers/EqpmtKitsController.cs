@@ -18,6 +18,7 @@ namespace allpax_sale_miner.Controllers
             return View(available_kits.ToList());
         }
 
+        [HttpPost]
         public ActionResult AddKit(tbl_eqpmt_kits_avlbl kitAdd)
         {
             using (allpax_sale_minerEntities entities = new allpax_sale_minerEntities())
