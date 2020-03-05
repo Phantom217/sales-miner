@@ -13,10 +13,6 @@
 
             //begin when a record class is clicked...
             $(".record").on('click keyup change', function () {
-                /*var selectedItem0 = $(this).attr("id");//works
-                var selectedItem1 = $(this).find("#record_item1").html();//works valid for inner html only
-                var selectedItem2 = $(this).find("#record_item2").html();//works valid for inner html only*/
-
                 selectedItem0 = $(this).attr("id");//works
                 selectedItem1 = $(this).find("#record_item1").html();//works valid for inner html only
                 selectedItem2 = $(this).find("#record_item2").html();//works valid for inner html only
@@ -31,13 +27,6 @@
                 $("#slctd_eventType").val(selectedItem3);
                 $("#slctd_startDate").val(selectedItem4);
                 $("#slctd_endDate").val(selectedItem5);
-                //$("#slctd_zipCode").val(selectedItem6);
-                /*alert(
-                    "Selected for Edit or Delete POST:"+ '\n' +
-                    "Record: " + selectedItem0 + '\n' +
-                    "Type: " + selectedItem1 + '\n' +
-                    "Sub-type: " + selectedItem2 + '\n'
-                );*/
             });
             //end when a record class is clicked...
 
