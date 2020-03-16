@@ -39,10 +39,9 @@ namespace allpax_sale_miner.Controllers
                     zipCode = customerAdd.zipCode,
                 });
 
-
                 entities.SaveChanges();
+                Response.AppendHeader("Refresh", 30 + "; URL=index.cshtml");
             }
-
             return new EmptyResult();
         }
 
